@@ -102,6 +102,17 @@ class SinglyLinkedList1 {
 
                 case 7: //Length of the linked list
                     System.out.println("List Length:-"+getListLength(llist.head));
+
+
+                case 8:
+                    //search an element in Linked List
+                    int key;
+                    System.out.println("Search node in LinkedList:-");
+                    key=sc.nextInt();
+//                    System.out.println(""+searchNode(llist.head,key));
+                    System.out.println(""+searchNodeWithRecursion(llist.head,key));
+                    break;
+
                 case 10:
                     condition = false;
                     break;
@@ -126,6 +137,44 @@ class SinglyLinkedList1 {
     {
         return getCountRec(head);
     }*/
+
+    public static boolean searchNode(Node node, int key)
+    {
+        Node temp=node;
+        while(temp!=null)
+        {
+            if(temp.data==key)
+            {
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;
+    }
+
+    public static boolean searchNodeWithRecursion(Node node, int key)
+    {
+        Node temp=node;
+        if(node.data==key)
+        {
+            return true;
+        }
+        if(node.next==null)
+        {
+            return false;
+        }
+        return searchNodeWithRecursion(node.next,key);
+/*        Node temp=node;
+        while(temp!=null)
+        {
+            if(temp.data==key)
+            {
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;*/
+    }
 
     public static int getListLength(Node listHead)
     {
