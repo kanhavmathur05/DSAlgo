@@ -1,8 +1,8 @@
-package LinkedList;
+package geeksforgeeks.LinkedList.SinglyLinkedList;
 
 import java.util.Scanner;
 
-class SinglyLinkedList {
+class SinglyLinkedList1 {
     Node head;
 
     static class Node {
@@ -27,16 +27,16 @@ class SinglyLinkedList {
         System.out.println();
     }
 
-    public static void deleteFirstNode(Node listHead)
-    {
+    public static Node deleteFirstNode(Node listHead) {
         Node temp = listHead;
         listHead = listHead.next;
+        return listHead;
     }
 
     public static void main(String args[]) {
 
         Scanner sc = new Scanner(System.in);
-        SinglyLinkedList llist = new SinglyLinkedList();
+        SinglyLinkedList1 llist = new SinglyLinkedList1();
         boolean condition = true;
         Node temp;
 
@@ -66,7 +66,7 @@ class SinglyLinkedList {
 
                 case 3:
                     //delete first/head node
-                    deleteFirstNode(llist.head);
+                    llist.head = deleteFirstNode(llist.head);
                     break;
 
                 case 4:
@@ -77,44 +77,86 @@ class SinglyLinkedList {
                             temp.next = null;
                             break;
                         }
+                        temp = temp.next;
                     }
                     break;
 
-                case 5:
+                case 5: //Case to get the first node. Still Incomplete.
                     System.out.println("Enter the position of the node to be deleted");
                     int position = sc.nextInt();
-                    temp=llist.head;
+                    temp = llist.head;
                     int i;
-                    for(i=1;i<position;i++)
-                    {
-                        if(i==position-1)
-                        {
-                            temp.next=temp.next.next;
+                    for (i = 1; i <= position; i++) {
+                        if (i == position - 1) {
+                            temp.next = temp.next.next;
                         }
-                        temp=temp.next;
+                        temp = temp.next;
                     }
                     break;
 
+
+                case 6:
+                    //Delete linked list
+                    llist.head=null;
+                    break;
+
+                case 7: //Length of the linked list
+                    System.out.println("List Length:-"+getListLength(llist.head));
                 case 10:
                     condition = false;
                     break;
             }
         }
+
+    }
+
+/*  Recursive way to get Linked List Length
+    public static int getCountRec(Node node)
+    {
+        // Base case
+        if (node == null)
+            return 0;
+
+        // Count is this node plus rest of the list
+        return 1 + getCountRec(node.next);
+    }
+
+    *//* Wrapper over getCountRec() *//*
+    public int getCount()
+    {
+        return getCountRec(head);
+    }*/
+
+    public static int getListLength(Node listHead)
+    {
+        Node temp=listHead;
+        int count=0;
+        while (temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
+//        int count=1;
+//        if(listHead==null)
+//        {
+//            return count-1;
+//        }
+//        else {
+//            if(listHead!=null && listHead.next==null)
+//            {
+//                return count;
+//            }
+//            else
+//            {
+//                while (listHead.next!=null)
+//                {
+//                    listHead.next=listHead.next.next;
+//                    count++;
+//                }
+//                return count;
+//            }
+//
+//        }
     }
 }
-
-        /*
-        * TO-DO
-        * 1)Insert in beginning
-        * 2)Insert at end
-        * 3)Insert after
-        * 4)Insert before
-        * 5)Delete in beginning
-        * 6)Delete at end
-        * 7)Delete node of data 'x'
-        * 8)List all
-        * 9)List in ascending order
-        * 10) List in descending order
-        * 11)Check availability of a node with data 'x' with location after and before node
-        * 12)Create different functions for these operations.
-        * */
